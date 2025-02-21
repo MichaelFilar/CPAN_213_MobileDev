@@ -51,9 +51,6 @@ export default function App() {
 };
 
   useEffect(() => {
-
-
-    console.log(progress)
     if (progress == 1) {
       setProgColour("red");
     } else {
