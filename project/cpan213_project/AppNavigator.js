@@ -9,7 +9,7 @@ import SummaryScreen from './screens/SummaryScreen';
 import SavedJokesScreen from './screens/SavedJokesScreen';
 import LogInScreen from './screens/LogInScreen';
 import globalStyles from './shared/GlobalStyles';
-import TabNavComponents from './screens/TabNavComponents';
+import TabNavComponent from './screens/TabNavComponents';
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator();
@@ -21,19 +21,6 @@ const headerOptions = ({navigation, route}) => (
       },
       headerTintColor: 'white',
       headerTitleAlign: 'center',
-      headerRight: () => (
-        <TouchableOpacity
-          onPress={ () => {
-            //reset navigation flow
-            navigation.dispatch(CommonActions.reset({
-              index: 0,
-              routes: [ {name: "Home"} ] //ideally should be reset to SignIn screen
-            }))
-          }}
-        >
-          <Text style = { {color: 'white'} }>Home</Text>
-        </TouchableOpacity>
-      )
     }
   )
 
@@ -42,29 +29,29 @@ const AppNavigator = () => {
         <SafeAreaProvider>
             <SafeAreaView style={globalStyles.safeArea}>
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName="Home">
+                    <Stack.Navigator initialRouteName="TabNav">
                         <Stack.Group screenOptions={headerOptions}>
+                          <Stack.Screen component={TabNavComponent} name = 'TabNav' />
                             <Stack.Screen
                                 name="Home"
                                 component={HomeScreen}
                                 options={{ title: 'Joke Generator' }}
                             />
                             <Stack.Screen
-                                name="LogIn"
+                                name="Log In"
                                 component={LogInScreen}
                                 options={{ title: 'Log In' }}
                             />
                             <Stack.Screen
-                                name="SavedJokes"
+                                name="Saved Jokes"
                                 component={SavedJokesScreen}
                                 options={{ title: 'Saved Jokes' }}
                             />
                             <Stack.Screen
-                                name="Summary"
+                                name="Profile"
                                 component={SummaryScreen}
-                                options={{ title: 'Summary' }}
+                                options={{ title: 'Profile' }}
                             />
-                            <Stack.Screen component={TabNavComponents} name = 'TabNav' />
                         </Stack.Group>
                     </Stack.Navigator>
                 </NavigationContainer>

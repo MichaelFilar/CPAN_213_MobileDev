@@ -24,9 +24,9 @@ const SavedJokesScreen = ({ navigation }) => {
           data={jokeList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <View>
+            <View style={globalStyles.listItem}>
               <Text>
-                {item.joke}
+                Joke #{item.generatedAt} - {item.joke}
               </Text>
             </View>
           )}

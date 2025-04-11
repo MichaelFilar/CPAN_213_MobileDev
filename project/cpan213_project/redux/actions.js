@@ -17,7 +17,7 @@ import {
 
 export const getJoke = (inJoke) => ({
     type: GET_JOKE,
-    payload: inJoke
+    payload: inJoke,
 })
 
 export const saveJoke = () => ({

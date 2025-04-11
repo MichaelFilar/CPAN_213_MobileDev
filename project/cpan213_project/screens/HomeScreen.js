@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { useState } from 'react';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getJoke, saveJoke } from '../redux/actions';
@@ -7,7 +7,6 @@ import globalStyles from '../shared/GlobalStyles';
 
 const HomeScreen = ( {navigation, route} ) => {
     const currentJoke = useSelector((state) => state.tasksRoot.currentJoke);
-    const [mainJoke, setMainJoke] = useState("");
     const dispatch = useDispatch();
 
 
@@ -29,6 +28,14 @@ const HomeScreen = ( {navigation, route} ) => {
         }
     };
 
+    const verifySave = () => {
+        if (currentJoke.length > 0) {
+        dispatch(saveJoke())
+        } else {
+            Alert.alert("No joke generated yet!")
+        }
+    }
+
   return (
     <View style={globalStyles.container}>
         <View style={globalStyles.container}>
@@ -46,12 +53,12 @@ const HomeScreen = ( {navigation, route} ) => {
             />
         </View>
         <View style={globalStyles.textContainer}>
-            <Text style={globalStyles.outputText}>{mainJoke}</Text>
+            <Text style={globalStyles.outputText}>{currentJoke}</Text>
         </View>
         <Button
                 title='Save Joke'
                 onPress={() => {
-                    dispatch(saveJoke());
+                    verifySave();
                 }}
             />
         <View style={globalStyles.spacer} />

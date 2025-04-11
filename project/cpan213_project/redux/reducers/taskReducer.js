@@ -13,9 +13,11 @@ import {
 
 const initialState = {
     user: "",
+    loggedIn: false,
     savedJokes: [
         {
             id: Date.now(),
+            generatedAt: 0,
             joke: 'Test Joke'
         }
     ],
@@ -54,19 +56,20 @@ export const taskReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                user: action.payload
+                user: action.payload,
+                loggedIn: true,
 
             }
         }
         case GET_JOKE: {
             console.log(`Getting joke`);
             console.log(`Joke : ${action.payload}`)
-            console.log(`Counter : ${state.counter}`)
+            console.log(`Counter : ${state.counter+1}`)
 
             return {
                 ...state,
                 currentJoke: action.payload,
-                counter: state.counter += 1
+                counter: state.counter + 1
 
             }
         }
@@ -78,6 +81,7 @@ export const taskReducer = (state = initialState, action) => {
                 savedJokes: [...state.savedJokes,
                 {
                     id: Date.now(),
+                    generatedAt: state.counter,
                     joke: state.currentJoke
                 }]
             }
